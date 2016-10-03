@@ -1,0 +1,108 @@
+body {
+	background-color: #001;
+	background-image: url("../img/fire.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: "Helvetica", "arial," sans-serif;	
+}
+
+#header {
+	font-family: 'Amatic SC', cursive;
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+.container {
+	align-items: center;
+	display: block;
+	text-align: center;
+	font-size: 18px;
+	max-width: 100%;
+}
+
+html {
+	background-image: url("../img/fire.png") no-repeat center center fixed;
+	-webkit-background size: cover;
+	-moz-background size: cover;
+	-o-background size: cover;
+	background-size: cover;
+}
+
+.jumbotron {
+	align-content: center;
+	background-color: rgba(13, 13, 13, .1);
+	text-align: center;	
+}
+
+
+.submit {
+	border-color: #ffff1a;
+	border-radius: 0;
+	background: #ff0000;
+	color: white;
+	margin: 10px;
+}
+
+.submit:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #ff0000;
+    background: #ffff1a;
+    border-color: #white; 
+}
+
+h2 {
+	font-family: 'Amatic SC', cursive;
+	font-size: xx-large;
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+.row {
+	align-content: center;
+	align-self: center;
+}
+
+.col-sm-4 {
+	align-content: center;
+	align-items: center;
+}
+
+.add {
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+#burg {
+	color: #ff0000;
+}
+
+#menu {
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+#add {
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+#eaten {
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+
+li {
+	margin-right: 40px;
+	list-style-position: inside;
+	list-style-type: none;
+}
+
+.footer {
+	background-color: #e63900;
+	border-top: solid;
+	border-color: #ffff1a;
+	color: white;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
