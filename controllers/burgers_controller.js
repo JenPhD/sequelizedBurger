@@ -13,17 +13,14 @@ var router  = express.Router();
 //This will show the burger and the user who created it 
 router.get('/', function (req, res) {
 	models.Sequelburger.findAll({
-		include: [ models.User ],
-		attributes: {
-			exclude: ['createdAt', 'updatedAt']
-		}		
+		include: [ models : User ]	
 		//then...
 	}).then(function(burgers) {
 		//grab the user info from our req.
 		//This info gets saved to req via the users-controller.js file
 		res.render('burgers/index', { 
-			user_id: req.session.user_id,
-			email: req.session.user_email,
+			   user_id: req.session.user_id,
+			   email: req.session.user_email,
       		logged_in: req.session.logged_in,
       		burgers: burgers
       	})
