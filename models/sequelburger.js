@@ -14,10 +14,15 @@ module.exports = function(sequelize, DataTypes) {
     // define the table's name
     tableName: 'sequelburgers',
 
-  }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        Sequelburger.belongsTo(models.User, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+        })
       }
     }
   });
