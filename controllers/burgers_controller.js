@@ -31,7 +31,7 @@ router.get('/', function (req, res) {
 //passed in req.body (name, devoured, user_id)
 router.post('/create', function (req, res) {
   models.Burger.create({
-    name: req.body.name,
+    burger_name: req.body.name,
   	devoured: req.body.devoured,
     user_id: req.session.user_id
   })
