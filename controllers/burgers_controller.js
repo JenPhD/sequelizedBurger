@@ -1,9 +1,6 @@
 var models = require('../models');
 var express = require('express');
 var router = express.Router();
-var models  = require('../models');
-var express = require('express');
-var router  = express.Router();
 
 // =================================================================
 // Routes
@@ -27,11 +24,11 @@ router.get('/', function (req, res) {
 	})
 });
 
-//Use the Burger model to create a burger based on what's 
+//Use the Sequelburger model to create a burger based on what's 
 //passed in req.body (name, devoured, user_id)
 router.post('/create', function (req, res) {
-  models.Burger.create({
-    burger_name: req.body.name,
+  models.Sequelburger.create({
+    burger_name: req.body.burger_name,
   	devoured: req.body.devoured,
     user_id: req.session.user_id
   })
@@ -41,11 +38,11 @@ router.post('/create', function (req, res) {
   })
 });
 
-//Use the Burger model to update a burger's devoured status
+//Use the Sequelburger model to update a burger's devoured status
 //based on the boolean passed in req.body.devoured
 //and the id of the burger (as passed in the url)
 router.put('/update/:id', function (req, res) {
-	models.Burger.update(
+	models.Sequelburger.update(
   	{
     devoured: req.body.devoured
   },
@@ -58,10 +55,10 @@ router.put('/update/:id', function (req, res) {
   })
 });
 
-//Use the Burger model to delete a burger
+//Use the Sequelburger model to delete a burger
 //based on the id passed in the url
 router.delete('/delete/:id', function(req,res) {
- models.Burger.destroy({
+ models.Sequelburger.destroy({
     where: {
       id: req.params.id
     }
