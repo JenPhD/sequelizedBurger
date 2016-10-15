@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', application_controller);
 app.use('/burgers', burgers_controller);
+app.use('/users', users_controller);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -65,7 +66,7 @@ app.use(function(err, req, res, next) {
   })
 });
 
-// our module get's exported as app.
+// our module gets exported as app.
 module.exports = app;
 
 //listener in bin/www
