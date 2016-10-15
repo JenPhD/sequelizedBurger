@@ -13,7 +13,7 @@ var router  = express.Router();
 //This will show the burger and the user who created it 
 router.get('/', function (req, res) {
 	models.Sequelburger.findAll({
-		include: [ models : User ]	
+		include: [ models.User ]	
 		//then...
 	}).then(function(burgers) {
 		//grab the user info from our req.
