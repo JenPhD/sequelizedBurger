@@ -11,10 +11,8 @@ var methodOverride = require('method-override'); //for deletes in express
 
 // Our model controllers
 var application_controller = require('./controllers/application_controller');
-
-//require controllers
-var application_controller = require('./controllers/application_controller');
 var burgers_controller = require('./controllers/burgers_controller.js');
+var users_controller = require('./controllers/users_controller');
 
 // Express settings
 // ==========================

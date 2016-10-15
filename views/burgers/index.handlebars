@@ -4,6 +4,13 @@
       <h1>Eat Da Burger!</h1>
         <h3>(not to be confused with Burger Time)</h3>
           <img src="assets/img/burgertime.jpg"></img>
+          {{#if username}}
+            Welcome {{username}}! Make some burgers.
+          {{/if}}
+
+          {{#unless logged_in}}
+            <p> Sign up to add your burgers!! </p>
+          {{/unless}}
     </div>
   </div><!--end container-->
 </div><!--end jumbotron-->
@@ -16,12 +23,13 @@
           {{#each burgers}}
             {{#unless this.devoured}}
               <li>
-                {{this.burger_name}}
+                {{this.burger_name}}  - created by {{this.User.email}}
 
                 <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                   <input type="hidden" name="devoured" value="true">
                   <button type="submit" class="submit">Devour it!!</button>
                 </form>
+
               </li>
             {{/unless}}
           {{/each}}
@@ -30,11 +38,12 @@
 
 
       <div id="add" class="col-md-4">
+      {{#if logged_in}}
         <h2>Add a Burger</h2>
           <form class="create-update-form" action="burgers/create" method="POST">
             <div class="add form-group">
               <label for="burg">Burger Name:</label>
-                <input type="text" id="burg" name="burger_name">
+                <input type="text" class="input" name="burger_name">
             </div>
             <button type="submit" class="submit">Add Burger</button>
           </form>
@@ -50,6 +59,8 @@
                 <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                   <input type="hidden" name="devoured" value="false">
                 </form>
+
+                {{> burgers/delete-burger}}
               </li>
             {{/if}}
           {{/each}}
@@ -62,6 +73,10 @@
   <footer class="footer">
       <small>&copy;Copyright Jennifer Pemberton 2016</small>
  </footer>
+
+  
+
+
 
   
 
