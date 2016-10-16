@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        User.hasMany(models.sequelburger, {
+        User.hasMany(models.Sequelburger, {
           onDelete: "CASCADE",
           hooks: true,
           foreignKey: {
