@@ -12,14 +12,14 @@ router.get('/', function (req, res) {
 	models.Sequelburger.findAll({
 		include: [ models.User ]	
 		//then...
-	}).then(function(burgers) {
+	}).then(function(sequelburgers) {
 		//grab the user info from our req.
 		//This info gets saved to req via the users-controller.js file
-		res.render('burgers/index', { 
+		res.render('index', { 
 			   user_id: req.session.user_id,
 			   email: req.session.user_email,
       		logged_in: req.session.logged_in,
-      		burgers: burgers
+      		sequelburgers: sequelburgers
       	})
 	})
 });

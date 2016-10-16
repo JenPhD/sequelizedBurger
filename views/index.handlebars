@@ -1,49 +1,84 @@
-<h1>Project Management Tool</h1>
+<div class="jumbotron"> 
+  <div class="container">  
+    <div id="header" class="col-md-12">
+      <h1>Eat Da Burger!</h1>
+        <h3>(not to be confused with Burger Time)</h3>
+          <img src="assets/img/burgertime.jpg"></img>
+          {{#if username}}
+            Welcome {{username}}! Make some burgers.
+          {{/if}}
 
-<h2>Create a new person</h2>
+          {{#unless logged_in}}
+            <p> Sign up to add your burgers!! </p>
+          {{/unless}}
+    </div>
+  </div><!--end container-->
+</div><!--end jumbotron-->
 
-{{#if logged_in}}
-  <form action="/people/create" method="POST">
-    <input type="text" name="name">
+<div class="container">
+    <div class="row">
+      <div id="menu" class="col-md-4">
+        <h2>On the menu!</h2>
+        <ul>
+          {{#each sequelburgers}}
+            {{#unless this.devoured}}
+              <li>
+                {{this.burger_name}}  - created by {{this.User.email}}
 
-    <input type="submit">
-  </form>
-{{/if}}
+                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="true">
+                  <button type="submit" class="submit">Devour it!!</button>
+                </form>
 
-{{#unless logged_in}}
-  <p>
-    You must login to add a person.
-  </p>
-{{/unless}}
+              </li>
+            {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
 
-<h2>People</h2>
 
-<ul>
-  {{#each people}}
-    <li>
-      {{this.name}}
-      {{#if ../logged_in}}
-        <a href="/people/{{this.id}}/destroy"> destroy</a>
+      <div id="add" class="col-md-4">
+      {{#if logged_in}}
+        <h2>Add a Burger</h2>
+          <form class="create-update-form" action="sequelburgers/create" method="POST">
+            <div class="add form-group">
+              <label for="burg">Burger Name:</label>
+                <input type="text" class="input" name="burger_name">
+            </div>
+            <button type="submit" class="submit">Add Burger</button>
+          </form>
       {{/if}}
-      <ul>
-        {{#if ../logged_in}}
-          <li>
-            <form action="/people/{{this.id}}/tasks/create" method="POST" style="display: inline">
-              <input type="text" name="task" placeholder="add task here">
-              <input type="submit" value"assign task">
-            </form>
-          </li>
-        {{/if}}
+      </div>
 
-        {{#each this.Tasks }}
-          <li>
-            {{this.task}}
-            {{#if ../../logged_in}}
-              <a href="/people/{{this.person_id}}/tasks/{{this.id}}/destroy">destroy</a>
+      <div id="eaten" class="col-md-4">
+        <h2>Devoured burgers</h2>
+        <ul>
+          {{#each sequelburgers}}
+            {{#if this.devoured}}
+              <li>
+                {{this.burger_name}}
+                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="false">
+                </form>
+
+                {{> sequelburgers/delete-burger}}
+              </li>
             {{/if}}
-          </li>
-        {{/each}}
-      </ul>
-    </li>
-  {{/each}}
-</ul>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+ 
+
+</div><!--end container-->
+  <footer class="footer">
+      <small>&copy;Copyright Jennifer Pemberton 2016</small>
+ </footer>
+
+  
+
+
+
+  
+
+

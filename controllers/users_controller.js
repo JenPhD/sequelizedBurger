@@ -63,7 +63,7 @@ router.post('/create', function(req,res) {
   }).then(function(users) {
 
 		if (users.length > 0){
-			console.log(users);
+			console.log(users)
 			res.send('we already have an email or username for this account')
 		} else {
 
