@@ -9,6 +9,21 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override'); //for deletes in express
 
+// Database setup
+var Sequelize = require('sequelize'),
+        connection;
+        console.log(process.env.JAWSDB_URL);
+if (process.env.JAWSDB_URL) {
+    connection = new Sequelize(process.env.JAWSDB_URL);
+} else {
+	connection = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'root',
+		database: 'sequelburger'
+	});
+};
+
 // Our model controllers
 var application_controller = require('./controllers/application_controller');
 var burgers_controller = require('./controllers/burgers_controller.js');
@@ -21,7 +36,8 @@ var users_controller = require('./controllers/users_controller');
 var app = express();
 
 // override POST to have DELETE and PUT
-app.use(methodOverride('_method'));
+//commenting out to see if this is messing up the devoured burgers list;
+//app.use(methodOverride('_method'));
 
 //allow sessions
 app.use(session({ secret: 'app', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
@@ -36,6 +52,9 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+//Serve static content for the app from the public directory
+app.use(express.static(process.cwd() + '/public'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

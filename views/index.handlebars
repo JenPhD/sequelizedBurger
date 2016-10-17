@@ -40,7 +40,7 @@
       <div id="add" class="col-md-4">
       {{#if logged_in}}
         <h2>Add a Burger</h2>
-          <form class="create-update-form" action="sequelburgers/create" method="POST">
+          <form class="create-update-form" action="burgers/create" method="POST">
             <div class="add form-group">
               <label for="burg">Burger Name:</label>
                 <input type="text" class="input" name="burger_name">
@@ -54,10 +54,10 @@
         <h2>Devoured burgers</h2>
         <ul>
           {{#each sequelburgers}}
-            {{#if this.devoured}}
+            {{#if this.devoured}} - created by {{this.User.email}}
               <li>
                 {{this.burger_name}}
-                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
+                <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                   <input type="hidden" name="devoured" value="false">
                 </form>
 

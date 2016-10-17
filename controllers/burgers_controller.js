@@ -52,7 +52,7 @@ router.put('/update/:id', function (req, res) {
   })
   // connect it to this .then.
   .then(function (result) {
-    res.redirect('/');
+    res.redirect('/burgers');
   })
 });
 
