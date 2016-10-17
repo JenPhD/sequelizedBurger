@@ -57,8 +57,8 @@
             {{#if this.devoured}} - created by {{this.User.email}}
               <li>
                 {{this.burger_name}}
-                <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                  <input type="hidden" name="devoured" value="false">
+                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="true">
                 </form>
 
                 {{> sequelburgers/delete-burger}}

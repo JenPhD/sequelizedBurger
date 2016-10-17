@@ -16,12 +16,11 @@ var Sequelize = require('sequelize'),
 if (process.env.JAWSDB_URL) {
     connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
-	connection = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'root',
-		database: 'sequelburger'
-	});
+    connection = new Sequelize('sequelburger', 'root', 'root', {
+        host: 'localhost',
+        dialect: 'mysql',
+        port: '3306'
+    })
 };
 
 // Our model controllers
@@ -36,7 +35,7 @@ var users_controller = require('./controllers/users_controller');
 var app = express();
 
 // override POST to have DELETE and PUT
-//commenting out to see if this is messing up the devoured burgers list;
+//Commenting out to see if it is affecting moving burgers to the devoured column.
 //app.use(methodOverride('_method'));
 
 //allow sessions
@@ -52,9 +51,6 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
-
-//Serve static content for the app from the public directory
-app.use(express.static(process.cwd() + '/public'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
