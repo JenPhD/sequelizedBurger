@@ -9,20 +9,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override'); //for deletes in express
 
-// Database setup
-var Sequelize = require('sequelize'),
-        connection;
-        console.log(process.env.JAWSDB_URL);
-if (process.env.JAWSDB_URL) {
-    connection = new Sequelize(process.env.JAWSDB_URL);
-} else {
-    connection = new Sequelize('sequelburger', 'root', 'root', {
-        host: 'localhost',
-        dialect: 'mysql',
-        port: '3306'
-    })
-};
-
 // Our model controllers
 var application_controller = require('./controllers/application_controller');
 var burgers_controller = require('./controllers/burgers_controller.js');
@@ -59,6 +45,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
 
 app.use('/', application_controller);
 app.use('/burgers', burgers_controller);

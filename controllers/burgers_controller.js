@@ -39,13 +39,13 @@ router.post('/create', function (req, res) {
   })
 });
 
-//Use the Sequelburger model to update a burger's devoured status
-//based on the boolean passed in req.body.devoured
-//and the id of the burger (as passed in the url)
+// Use the Sequelburger model to update a burger's devoured status
+// based on the boolean passed in req.body.devoured
+// and the id of the burger (as passed in the url)
 router.put('/update/:id', function (req, res) {
 	models.Sequelburger.update(
   	{
-    devoured: req.body.devoured
+    devoured: req.body.devoured  
   },
   {
     where: { id : req.params.id }

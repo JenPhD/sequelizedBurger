@@ -25,7 +25,7 @@
               <li>
                 {{this.burger_name}}  - created by {{this.User.email}}
 
-                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
+                <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                   <input type="hidden" name="devoured" value="true">
                   <button type="submit" class="submit">Devour it!!</button>
                 </form>
@@ -57,11 +57,7 @@
             {{#if this.devoured}} - created by {{this.User.email}}
               <li>
                 {{this.burger_name}}
-                <form action="sequelburgers/update/{{this.id}}?_method=PUT" method="POST">
-                  <input type="hidden" name="devoured" value="true">
-                </form>
-
-                {{> sequelburgers/delete-burger}}
+                {{> burgers/delete-burger}}
               </li>
             {{/if}}
           {{/each}}
