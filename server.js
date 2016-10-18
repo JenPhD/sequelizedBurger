@@ -19,6 +19,10 @@ var users_controller = require('./controllers/users_controller');
 
 // instantiate our app
 var app = express();
+var Users = require('./models')['user'];
+var sequelBurgers = require('./models')['sequelburger'];
+Users.sync();
+sequelBurgers.sync();
 
 // override POST to have DELETE and PUT
 //Commenting out to see if it is affecting moving burgers to the devoured column.
