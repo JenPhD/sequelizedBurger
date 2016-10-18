@@ -34,6 +34,13 @@ html {
 	text-align: center;	
 }
 
+#signin #new {
+	float: right;
+	clear: both;
+}
+.create-update-form {
+	font-size: x-large;
+}
 
 .submit {
 	border-color: #ffff1a;
@@ -55,6 +62,23 @@ h2 {
 	color: #ffff1a;
 	text-shadow: 2px 2px #ff0000;
 }
+
+.sign {
+	margin-right: 30px;
+	font-size: large;
+	font-family: 'Amatic SC', cursive;
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
+.sign > a {
+	margin-right: 50px;
+	font-size: large;
+	font-family: 'Amatic SC', cursive;
+	color: #ffff1a;
+	text-shadow: 2px 2px #ff0000;
+}
+
 .row {
 	align-content: center;
 	align-self: center;
@@ -95,6 +119,8 @@ li {
 	list-style-position: inside;
 	list-style-type: none;
 }
+
+
 
 .footer {
 	background-color: #e63900;

@@ -22,15 +22,14 @@ Here is the main HTML where handlebars will render to
 <title>Eat Da Burger</title>   
 </head>
 <body>
-		<p>
+		<p class="sign" align="right">
 			{{#unless logged_in}}
 				<a href="/users/sign-in">Sign In</a>
 				<a href="/users/new">Sign Up</a>
 			{{/unless}}
 
 			{{#if logged_in}}
-				Welcome {{email}}! <br>
-				You are user {{user_id}}.<br>
+				Welcome {{username}}! <br>
 				<a href="/users/sign-out">Sign Out</a>
 			{{/if}}
 		</p>

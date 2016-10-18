@@ -3,7 +3,7 @@
     <div id="header" class="col-md-12">
       <h1>Eat Da Burger!</h1>
         <h3>(not to be confused with Burger Time)</h3>
-          <img src="assets/img/burgertime.jpg"></img>
+          <img src="assets/img/burgertime.jpg"></img><br>
           {{#if username}}
             Welcome {{username}}! Make some burgers.
           {{/if}}
@@ -23,7 +23,7 @@
           {{#each sequelburgers}}
             {{#unless this.devoured}}
               <li>
-                {{this.burger_name}}  - created by {{this.User.email}}
+                {{this.burger_name}}  - created by {{this.User.username}}
 
                 <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
                   <input type="hidden" name="devoured" value="true">
@@ -54,7 +54,7 @@
         <h2>Devoured burgers</h2>
         <ul>
           {{#each sequelburgers}}
-            {{#if this.devoured}} - created by {{this.User.email}}
+            {{#if this.devoured}} - created by {{this.User.username}}
               <li>
                 {{this.burger_name}}
                 {{> burgers/delete-burger}}

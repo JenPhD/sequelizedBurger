@@ -39,11 +39,11 @@ router.post('/login', function(req, res) {
 		//save the logged-in status to the session
         req.session.logged_in = true;
         // the username to the session
-		req.session.username = User.username;
+		req.session.username = user.username;
 		// the user id to the session
-        req.session.user_id = User.id;
+        req.session.user_id = user.id;
         // and the user's email.
-        req.session.user_email = User.email;
+        req.session.user_email = user.email;
 
         res.redirect('/');
       }
@@ -59,10 +59,7 @@ router.post('/login', function(req, res) {
 // register a user
 router.post('/create', function(req,res) {
 	models.User.findAll({
-    where: {
-    	username: req.body.username,
-    	email: req.body.email
-    	}
+    where: {email: req.body.email}
   }).then(function(users) {
 
 		if (users.length > 0){
@@ -79,7 +76,7 @@ router.post('/create', function(req,res) {
 				bcrypt.hash(req.body.password, salt, function(err, hash) {
 					
 					// Using the User model, create a new user,
-					// storing the username, email they sent and the hash you just made
+					// storing the email they sent and the hash you just made
 					models.User.create({
 						username: req.body.username,
 						email: req.body.email,
@@ -87,7 +84,7 @@ router.post('/create', function(req,res) {
 					})
 					// In a .then promise connected to that create method,
 					// save the user's information to req.session
-					.then(function(users){
+					.then(function(user){
 					//enter the user's session by setting properties to req.
 					//save the logged in status to the session
 	          		req.session.logged_in = true;
