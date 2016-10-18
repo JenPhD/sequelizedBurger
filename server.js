@@ -19,8 +19,8 @@ var users_controller = require('./controllers/users_controller');
 
 // instantiate our app
 var app = express();
-var Users = require('./models')['user'];
-var sequelBurgers = require('./models')['sequelburger'];
+var Users = require('./models')['User'];
+var sequelBurgers = require('./models')['Sequelburger'];
 Users.sync();
 sequelBurgers.sync();
 
