@@ -1,7 +1,10 @@
 {
   "name": "sequelizedburger",
   "version": "1.0.0",
-  "engines": "node 4.4.5",
+  "engines": {
+    "node": "4.4.5",
+    "npm": "3.10.6"
+  },
   "description": "burger logger with MySQL Node Express Handlebars ORM",
   "main": "server.js",
   "scripts": {
@@ -42,6 +45,5 @@
     "sequelize": "^3.24.3",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "^2.3.0"
-  },
-  "devDependencies": {}
+  }
 }
