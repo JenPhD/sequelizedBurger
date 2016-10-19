@@ -25,10 +25,6 @@ var Sequelburger = require('./models')['Sequelburger'];
 User.sync();
 Sequelburger.sync();
 
-// override POST to have DELETE and PUT
-//Commenting out to see if it is affecting moving burgers to the devoured column.
-//app.use(methodOverride('_method'));
-
 //allow sessions
 app.use(session({ secret: 'app', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 app.use(cookieParser());
