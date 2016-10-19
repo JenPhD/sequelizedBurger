@@ -66,13 +66,15 @@ app.use(function(req, res, next) {
 
 // error handler
 // no stacktraces leaked to user unless in development environment
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
-  })
-});
+//commenting out to see if heroku does not like env development stuff
+//in two files.
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: (app.get('env') === 'development') ? err : {}
+//   })
+// });
 
 // our module gets exported as app.
 module.exports = app;
