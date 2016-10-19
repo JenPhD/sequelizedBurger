@@ -2,36 +2,27 @@
 // =================================
 var express = require('express');
 var path = require('path');
-var http = require('http');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser'); //for working with cookies
-var bodyParser = require('body-parser');
 var session = require('express-session');
-var methodOverride = require('method-override'); //for deletes in express
-
-// Our model controllers
-var application_controller = require('./controllers/application_controller');
-var burgers_controller = require('./controllers/burgers_controller.js');
-var users_controller = require('./controllers/users_controller');
 
 // Express settings
 // ==========================
 
 // instantiate our app
 var app = express();
+//Sequelize migrations
 var User = require('./models')['User'];
 var Sequelburger = require('./models')['Sequelburger'];
 User.sync();
 Sequelburger.sync();
 
-//allow sessions
+//allow sessions and use cookie parser
+var cookieParser = require('cookie-parser');
 app.use(session({ secret: 'app', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 app.use(cookieParser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
 //set up handlebars
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({
@@ -41,14 +32,28 @@ app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+
+//Configure public web folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Configure body-parser middleware
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+//Set up console logger
+var logger = require('morgan');
+app.use(logger('dev'));
+
+//Configure app routes
 //override with POST having ?_method=DELETE
+var methodOverride = require('method-override'); //for deletes in express
 app.use(methodOverride('_method'));
 
+// Our model controllers
+var application_controller = require('./controllers/application_controller');
+var burgers_controller = require('./controllers/burgers_controller.js');
+var users_controller = require('./controllers/users_controller');
 app.use('/', application_controller);
 app.use('/burgers', burgers_controller);
 app.use('/users', users_controller);
@@ -60,17 +65,25 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-// no stacktraces leaked to user unless in development environment
-//commenting out to see if heroku does not like env development stuff
-//in two files.
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: (app.get('env') === 'development') ? err : {}
-//   })
-// });
+// Error handler -- development error handler will print stacktrace
+if (app.get('env') === 'development') {
+	app.use(function(err, req, res) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
+}
+
+//Error handler -- production handler not leaking stacktrace to user
+app.use(function(err, req, res) {
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
+});
 
 // our module gets exported as app.
 module.exports = app;

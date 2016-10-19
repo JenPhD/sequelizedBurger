@@ -1,17 +1,21 @@
+//require bcrypt for authentication/hashing and salting of passwords
 var bcrypt = require('bcryptjs');
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
 
 //this is the users_controller.js file
+//Get, renders sign up for new users
 router.get('/new', function(req,res) {
 	res.render('users/new');
 });
 
+//Get, renders sign in for users with account
 router.get('/sign-in', function(req,res) {
 	res.render('users/sign_in');
 });
 
+//Get, redirects to home on sign-out
 router.get('/sign-out', function(req,res) {
   req.session.destroy(function(err) {
      res.redirect('/')
@@ -19,7 +23,8 @@ router.get('/sign-out', function(req,res) {
 });
 
 
-// login
+// login for users with account, matches with email and redirects to
+//sign-in
 router.post('/login', function(req, res) {
   models.User.findOne({
     where: {email: req.body.email}
@@ -56,7 +61,7 @@ router.post('/login', function(req, res) {
   })
 });
 
-// register a user
+// register and create a user, matching with email
 router.post('/create', function(req,res) {
 	models.User.findAll({
     where: {email: req.body.email}
